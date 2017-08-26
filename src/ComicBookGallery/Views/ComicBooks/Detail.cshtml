@@ -28,11 +28,25 @@
         <h1>@seriesTitle</h1>
         <h2>Issue #@issueNumber</h2>
 
+        <!--Used Html.Raw() since variable description has html within the c# code-->
+        <!--otherwise it would display the html literally-->
         <h5>Description:</h5>
         <div>@Html.Raw(@description)</div>
 
-        <h5>Artists:</h5>
-        <div>@artists</div>
+        <!-- Used a FOREACH loop to make sure each artist IN variable artists is displayed properly-->
+        <!-- Also included an IF statement if there are no artists in the artists ARRAY. Nothing will appear on screen if nothing is in the array.-->
+        @if (artists.Length > 0) {
+            <h5>Artists:</h5>
+                    <div>
+                        <ul>
+                            @foreach (var artist in artists) {
+                                <li>@artist</li>
+                            }
+                        </ul>
+                    </div>
+        }
+
+
     </div>
 </body>
 </html>
