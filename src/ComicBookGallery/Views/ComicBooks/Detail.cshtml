@@ -1,25 +1,28 @@
-﻿@{
+﻿@model ComicBookGallery.Models.ComicBook
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Comic Book Detail";
+    ViewBag.Title = Model.DisplayText;
 
 }
 
-<h1>@ViewBag.SeriesTitle</h1>
-<h2>Issue #@ViewBag.IssueNumber</h2>
+<h1>@Model.SeriesTitle</h1>
+<h2>Issue #@Model.IssueNumber</h2>
 
 <!--Used Html.Raw() since variable description has html within the c# code-->
 <!--otherwise it would display the html literally-->
 <h5>Description:</h5>
-<div>@Html.Raw(@ViewBag.Description)</div>
+<div>@Html.Raw(@Model.DescriptionHtml)</div>
 
 <!-- Used a FOREACH loop to make sure each artist IN variable artists is displayed properly-->
 <!-- Also included an IF statement if there are no artists in the artists ARRAY. Nothing will appear on screen if nothing is in the array.-->
-@if (ViewBag.Artists.Length > 0) {
+@if (Model.Artists.Length > 0) {
     <h5>Artists:</h5>
             <div>
                 <ul>
-                    @foreach (var artist in ViewBag.Artists) {
-                        <li>@artist</li>
+                    @foreach (var artist in Model.Artists) {
+                        // renders Role and Name property through Razor
+                        <li>@artist.Role : @artist.Name</li>
                     }
                 </ul>
             </div>
