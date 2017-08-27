@@ -1,41 +1,26 @@
 ﻿@{
-    Layout = null;
-
-
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Comic Book Detail";
 
 }
 
-<!DOCTYPE html>
+<h1>@ViewBag.SeriesTitle</h1>
+<h2>Issue #@ViewBag.IssueNumber</h2>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-        <h1>@ViewBag.SeriesTitle</h1>
-        <h2>Issue #@ViewBag.IssueNumber</h2>
+<!--Used Html.Raw() since variable description has html within the c# code-->
+<!--otherwise it would display the html literally-->
+<h5>Description:</h5>
+<div>@Html.Raw(@ViewBag.Description)</div>
 
-        <!--Used Html.Raw() since variable description has html within the c# code-->
-        <!--otherwise it would display the html literally-->
-        <h5>Description:</h5>
-        <div>@Html.Raw(@ViewBag.Description)</div>
-
-        <!-- Used a FOREACH loop to make sure each artist IN variable artists is displayed properly-->
-        <!-- Also included an IF statement if there are no artists in the artists ARRAY. Nothing will appear on screen if nothing is in the array.-->
-        @if (ViewBag.Artists.Length > 0) {
-            <h5>Artists:</h5>
-                    <div>
-                        <ul>
-                            @foreach (var artist in ViewBag.Artists) {
-                                <li>@artist</li>
-                            }
-                        </ul>
-                    </div>
-        }
-
-
-    </div>
-</body>
-</html>
+<!-- Used a FOREACH loop to make sure each artist IN variable artists is displayed properly-->
+<!-- Also included an IF statement if there are no artists in the artists ARRAY. Nothing will appear on screen if nothing is in the array.-->
+@if (ViewBag.Artists.Length > 0) {
+    <h5>Artists:</h5>
+            <div>
+                <ul>
+                    @foreach (var artist in ViewBag.Artists) {
+                        <li>@artist</li>
+                    }
+                </ul>
+            </div>
+}
